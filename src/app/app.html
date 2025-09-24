@@ -1,4 +1,20 @@
-<h1>{{title()}}</h1>
+<div id="myDIV" class="header">
+  <h2 style="margin: 5px">{{ title() }}</h2>
+  <input type="text" id="myInput" placeholder="Title..." [(ngModel)]="newTodoText" />
+  <button (click)="addTodo()" class="addBtn">Add</button>
+</div>
 
-
-<router-outlet />
+<ul id="myUL">
+  @for (todo of todos(); track todo.text) {
+    <li
+      (click)="toggleTodo(todo)"
+      (keydown.enter)="toggleTodo(todo)"
+      [class.checked]="todo.completed"
+      role="button"
+      tabindex="0"
+    >
+      {{ todo.text }}
+      <button (click)="deleteTodo(todo); $event.stopPropagation()" class="close">&times;</button>
+    </li>
+  }
+</ul>
