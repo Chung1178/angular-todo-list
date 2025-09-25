@@ -1,0 +1,29 @@
+<div id="myDIV" class="header">
+  <h2 style="margin: 5px">My To Do List</h2>
+  <input type="text" id="myInput" placeholder="Title..." [(ngModel)]="newTodoText" />
+  <span (click)="addTodo()" (keydown.enter)="addTodo()" class="addBtn" role="button" tabindex="0"
+    >Add</span
+  >
+</div>
+
+<ul id="myUL">
+  @for (todo of todos(); track todo.text) {
+    <li
+      (click)="toggleTodo(todo)"
+      (keydown.enter)="toggleTodo(todo)"
+      [class.checked]="todo.completed"
+      role="button"
+      tabindex="0"
+    >
+      {{ todo.text }}
+      <span
+        (click)="deleteTodo(todo); $event.stopPropagation()"
+        (keydown.enter)="deleteTodo(todo)"
+        class="close"
+        role="button"
+        tabindex="0"
+        >&times;</span
+      >
+    </li>
+  }
+</ul>
